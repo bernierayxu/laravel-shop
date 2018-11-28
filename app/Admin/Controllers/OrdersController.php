@@ -13,6 +13,7 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 use App\Http\Requests\Admin\HandleRefundRequest;
+use App\Services\OrderService;
 
 class OrdersController extends Controller
 {
@@ -44,6 +45,11 @@ class OrdersController extends Controller
         // 判断当前订单发货状态是否为未发货
         if ($order->ship_status !== Order::SHIP_STATUS_PENDING) {
             throw new InvalidRequestException('该订单已发货');
+        }
+        // 众筹订单只有在众筹成功之后发货
+        if ($order->type === Order::TYPE_CROWDFUNDING &&
+            $order->items[0]->product->crowdfunding->status !== CrowdfundingProduct::STATUS_SUCCESS) {
+            throw new InvalidRequestException('众筹订单只能在众筹成功之后发货');
         }
         // Laravel 5.5 之后 validate 方法可以返回校验过的值
         $data = $this->validate($request, [
@@ -106,14 +112,7 @@ class OrdersController extends Controller
         }
         // 是否同意退款
         if ($request->input('agree')) {
-            // 清空拒绝退款理
-            $extra = $order->extra ?: [];
-            unset($extra['refund_disagree_reason']);
-            $order->update([
-                'extra' => $extra,
-            ]);
-            // 调用退款逻辑
-            $this->_refundOrder($order);
+            $orderService->refundOrder($order);
         } else {
             // 将拒绝退款理由放到订单的 extra 字段中
             $extra = $order->extra ?: [];
@@ -141,7 +140,7 @@ class OrdersController extends Controller
                     'refund_fee' => $order->total_amount * 100, // 要退款的订单金额，单位分
                     'out_refund_no' => $refundNo, // 退款订单号
                     // 微信支付的退款结果并不是实时返回的，而是通过退款回调来通知，因此这里需要配上退款回调接口地址
-                    'notify_url' => route('payment.wechat.refund_notify'),
+                    'notify_url' => ngrok_url('payment.wechat.refund_notify'),
                 ]);
                 // 将订单状态改成退款中
                 $order->update([

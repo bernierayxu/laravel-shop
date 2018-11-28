@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.21, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
--- Host: localhost    Database: laravel-shop
+-- Host: 127.0.0.1    Database: laravel-shop
 -- ------------------------------------------------------
--- Server version	5.7.21-0ubuntu0.16.04.1
+-- Server version	5.7.24-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -21,7 +21,7 @@
 
 LOCK TABLES `admin_menu` WRITE;
 /*!40000 ALTER TABLE `admin_menu` DISABLE KEYS */;
-INSERT INTO `admin_menu` VALUES (1,0,1,'首页','fa-bar-chart','/',NULL,'2018-05-31 23:30:13'),(2,0,6,'系统管理','fa-tasks',NULL,NULL,'2018-06-05 07:33:59'),(3,2,7,'管理员','fa-users','auth/users',NULL,'2018-06-05 07:33:59'),(4,2,8,'角色','fa-user','auth/roles',NULL,'2018-06-05 07:33:59'),(5,2,9,'权限','fa-ban','auth/permissions',NULL,'2018-06-05 07:33:59'),(6,2,10,'菜单','fa-bars','auth/menu',NULL,'2018-06-05 07:33:59'),(7,2,11,'操作日志','fa-history','auth/logs',NULL,'2018-06-05 07:33:59'),(8,0,2,'用户管理','fa-users','/users','2018-05-31 23:54:14','2018-05-31 23:55:10'),(9,0,3,'商品管理','fa-cubes','/products','2018-06-01 00:28:19','2018-06-01 00:28:24'),(10,0,4,'订单管理','fa-rmb','/orders','2018-06-05 02:45:54','2018-06-05 02:46:10'),(11,0,5,'优惠券管理','fa-tags','/coupon_codes','2018-06-05 07:33:54','2018-06-05 07:33:59');
+INSERT INTO `admin_menu` VALUES (1,0,1,'Index','fa-bar-chart','/',NULL,NULL),(2,0,2,'Admin','fa-tasks','',NULL,NULL),(3,2,3,'Users','fa-users','auth/users',NULL,NULL),(4,2,4,'Roles','fa-user','auth/roles',NULL,NULL),(5,2,5,'Permission','fa-ban','auth/permissions',NULL,NULL),(6,2,6,'Menu','fa-bars','auth/menu',NULL,NULL),(7,2,7,'Operation log','fa-history','auth/logs',NULL,NULL);
 /*!40000 ALTER TABLE `admin_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `admin_permissions` WRITE;
 /*!40000 ALTER TABLE `admin_permissions` DISABLE KEYS */;
-INSERT INTO `admin_permissions` VALUES (1,'All permission','*','','*',NULL,NULL),(2,'Dashboard','dashboard','GET','/',NULL,NULL),(3,'Login','auth.login','','/auth/login\r\n/auth/logout',NULL,NULL),(4,'User setting','auth.setting','GET,PUT','/auth/setting',NULL,NULL),(5,'Auth management','auth.management','','/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs',NULL,NULL),(6,'用户管理','users','','/users*','2018-05-31 23:57:45','2018-05-31 23:58:55'),(7,'商品管理','products','','/products*','2018-06-05 21:07:20','2018-06-05 21:07:20'),(8,'订单管理','orders','','/orders*','2018-06-05 21:07:36','2018-06-05 21:07:36'),(9,'优惠券管理','coupon_codes','','/coupon_codes*','2018-06-05 21:07:52','2018-06-05 21:07:52');
+INSERT INTO `admin_permissions` VALUES (1,'All permission','*','','*',NULL,NULL),(2,'Dashboard','dashboard','GET','/',NULL,NULL),(3,'Login','auth.login','','/auth/login\r\n/auth/logout',NULL,NULL),(4,'User setting','auth.setting','GET,PUT','/auth/setting',NULL,NULL),(5,'Auth management','auth.management','','/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs',NULL,NULL);
 /*!40000 ALTER TABLE `admin_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,7 +51,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `admin_role_permissions` WRITE;
 /*!40000 ALTER TABLE `admin_role_permissions` DISABLE KEYS */;
-INSERT INTO `admin_role_permissions` VALUES (1,1,NULL,NULL),(2,2,NULL,NULL),(2,3,NULL,NULL),(2,4,NULL,NULL),(2,6,NULL,NULL),(2,7,NULL,NULL),(2,8,NULL,NULL),(2,9,NULL,NULL);
+INSERT INTO `admin_role_permissions` VALUES (1,1,NULL,NULL);
 /*!40000 ALTER TABLE `admin_role_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `admin_role_users` WRITE;
 /*!40000 ALTER TABLE `admin_role_users` DISABLE KEYS */;
-INSERT INTO `admin_role_users` VALUES (1,1,NULL,NULL),(2,2,NULL,NULL);
+INSERT INTO `admin_role_users` VALUES (1,1,NULL,NULL);
 /*!40000 ALTER TABLE `admin_role_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,7 +71,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `admin_roles` WRITE;
 /*!40000 ALTER TABLE `admin_roles` DISABLE KEYS */;
-INSERT INTO `admin_roles` VALUES (1,'Administrator','administrator','2018-05-31 23:27:29','2018-05-31 23:27:29'),(2,'运营','operator','2018-06-01 00:13:12','2018-06-01 00:13:12');
+INSERT INTO `admin_roles` VALUES (1,'Administrator','administrator','2018-11-26 21:12:07','2018-11-26 21:12:07');
 /*!40000 ALTER TABLE `admin_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `admin_users` WRITE;
 /*!40000 ALTER TABLE `admin_users` DISABLE KEYS */;
-INSERT INTO `admin_users` VALUES (1,'admin','$2y$10$OznUPzz7OoiDZ/l4/qS1HeUULZUt20z7gxnHD8t5SIVHJK/kgINES','Administrator',NULL,'T0Z0y7MHmNNjw0r8NvnOmOLL4tKg4GGUziYtjYOoabrzhuTLs1JWEO1QRjuZ','2018-05-31 23:27:29','2018-05-31 23:27:29'),(2,'operator','$2y$10$YcmXJVEVHFAERGt14fjM6.IHDKdUEuNRhRjuYAZ39qoRBD9g29I8q','运营',NULL,'miIX5uwGont5AjaGsu84n2iMnzJLONPmYpmtb0Qhe7dgvgFgiJp52VpMxNSO','2018-06-01 00:13:51','2018-06-01 00:13:51');
+INSERT INTO `admin_users` VALUES (1,'admin','$2y$10$ZkImNhitfzMRuUelws8HfuYoPwnt/AhduO/XnOOqDE3RGc2sKb6Ve','Administrator',NULL,NULL,'2018-11-26 21:12:07','2018-11-26 21:12:07');
 /*!40000 ALTER TABLE `admin_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -103,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-05 22:46:26
+-- Dump completed on 2018-11-26 15:07:07
